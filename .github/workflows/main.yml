@@ -1,0 +1,39 @@
+name: Check Tel Links
+
+on:
+  workflow_dispatch: # Enables manual trigger
+    inputs:
+      homepage_url:
+        description: "Homepage URL to crawl" # Description for the URL input
+        required: true
+        default: "https://example.com" # Default URL
+      phone_numbers:
+        description: "Comma-separated list of allowed phone numbers" # Description for the phone numbers input
+        required: true
+        default: "+1234567890" # Default phone numbers
+
+jobs:
+  tel_check:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # Step 4: Run Playwright script with inputs
+      - name: Run Playwright Tel Link Checker
+        run: |
+          npx playwright test --project=chromium \
+            HOMEPAGE_URL="${{ github.event.inputs.homepage_url }}" \
+            PHONE_NUMBERS="${{ github.event.inputs.phone_numbers }}"
