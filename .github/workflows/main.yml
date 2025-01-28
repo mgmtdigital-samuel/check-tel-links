@@ -35,7 +35,9 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install
 
-      # Step 5: Run Playwright Tests
+     # Step 5: Run Playwright Tests
       - name: Run Playwright Tel Link Checker
-        run: |
-          npx playwright test
+        env:
+          HOMEPAGE_URL: ${{ github.event.inputs.homepage_url }}
+          PHONE_NUMBERS: ${{ github.event.inputs.phone_numbers }}
+        run: npx playwright test --project=chromium
