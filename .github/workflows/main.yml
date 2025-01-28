@@ -1,16 +1,16 @@
 name: Check Tel Links
 
 on:
-  workflow_dispatch: # Enables manual trigger
+  workflow_dispatch:
     inputs:
       homepage_url:
-        description: "Homepage URL to crawl" # Description for the URL input
+        description: "Homepage URL to crawl"
         required: true
-        default: "https://example.com" # Default URL
+        default: "https://example.com"
       phone_numbers:
-        description: "Comma-separated list of allowed phone numbers" # Description for the phone numbers input
+        description: "Comma-separated list of allowed phone numbers"
         required: true
-        default: "+1234567890" # Default phone numbers
+        default: "+1234567890"
 
 jobs:
   tel_check:
@@ -21,11 +21,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js
+      # Step 2: Set up Node.js (explicitly set to version 18)
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18' # Specify Node.js version 18
 
       # Step 3: Install dependencies
       - name: Install dependencies
