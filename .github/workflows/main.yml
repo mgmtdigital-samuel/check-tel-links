@@ -34,7 +34,4 @@ jobs:
       # Step 4: Run Playwright Tests
       - name: Run Playwright Tel Link Checker
         run: |
-          npx playwright test --project=chromium \
-            --config=playwright.config.ts \
-            HOMEPAGE_URL="${{ github.event.inputs.homepage_url }}" \
-            PHONE_NUMBERS="${{ github.event.inputs.phone_numbers }}"
+          npx playwright test
