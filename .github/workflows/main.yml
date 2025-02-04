@@ -11,6 +11,14 @@ on:
         description: "Comma-separated list of allowed phone numbers"
         required: true
         default: "+1234567890"
+      homepage_only:
+        description: "Set to 'true' to only check the homepage"
+        required: false
+        default: "false"
+      top_level_only:
+        description: "Set to 'true' to only check top-level pages"
+        required: false
+        default: "false"
 
 jobs:
   tel_check:
@@ -40,4 +48,6 @@ jobs:
         env:
           HOMEPAGE_URL: ${{ github.event.inputs.homepage_url }}
           PHONE_NUMBERS: ${{ github.event.inputs.phone_numbers }}
-        run: npx playwright test --project=chromium
+          HOMEPAGE_ONLY: ${{ github.event.inputs.homepage_only }}
+          TOP_LEVEL_ONLY: ${{ github.event.inputs.top_level_only }}
+        run: npx playwright test
